@@ -2,55 +2,56 @@ import { Fragment, useState } from 'react'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
+import Input1 from '../../../inputGroup'
 
 const sortOptions = [
-  { name: 'Most Popular', href: '#', current: true },
-  { name: 'Best Rating', href: '#', current: false },
-  { name: 'Newest', href: '#', current: false },
-  { name: 'Price: Low to High', href: '#', current: false },
-  { name: 'Price: High to Low', href: '#', current: false },
+  { name: 'sort1', href: '#', current: true },
+  { name: 'sort2', href: '#', current: false },
+  { name: 'sort3', href: '#', current: false },
+  { name: 'sort4', href: '#', current: false },
+  { name: 'sort5', href: '#', current: false },
 ]
 const subCategories = [
-  { name: 'Totes', href: '#' },
-  { name: 'Backpacks', href: '#' },
-  { name: 'Travel Bags', href: '#' },
-  { name: 'Hip Bags', href: '#' },
-  { name: 'Laptop Sleeves', href: '#' },
+  { name: 'subcat1', href: '#' },
+  { name: 'subcat2', href: '#' },
+  { name: 'subcat3', href: '#' },
+  { name: 'subcat4', href: '#' },
+  { name: 'subcat5', href: '#' },
 ]
 const filters = [
   {
-    id: 'color',
-    name: 'Color',
+    id: 'option1',
+    name: 'option1',
     options: [
-      { value: 'white', label: 'White', checked: false },
-      { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: true },
-      { value: 'brown', label: 'Brown', checked: false },
-      { value: 'green', label: 'Green', checked: false },
-      { value: 'purple', label: 'Purple', checked: false },
+      { value: 'subopt1', label: 'subopt1', checked: false },
+      { value: 'subopt2', label: 'subopt2', checked: false },
+      { value: 'subopt3', label: 'subopt3', checked: true },
+      { value: 'subopt4', label: 'subopt4', checked: false },
+      { value: 'subopt5', label: 'subopt5', checked: false },
+      { value: 'subopt6', label: 'subopt6', checked: false },
     ],
   },
   {
-    id: 'category',
-    name: 'Category',
+    id: 'option2',
+    name: 'option2',
     options: [
-      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-      { value: 'sale', label: 'Sale', checked: false },
-      { value: 'travel', label: 'Travel', checked: true },
-      { value: 'organization', label: 'Organization', checked: false },
-      { value: 'accessories', label: 'Accessories', checked: false },
+      { value: 'subopt1', label: 'subopt1', checked: false },
+      { value: 'subopt2', label: 'subopt2', checked: false },
+      { value: 'subopt3', label: 'subopt3', checked: true },
+      { value: 'subopt4', label: 'subopt4', checked: false },
+      { value: 'subopt5', label: 'subopt5', checked: false },
     ],
   },
   {
-    id: 'size',
-    name: 'Size',
+    id: 'option3',
+    name: 'option3',
     options: [
-      { value: '2l', label: '2L', checked: false },
-      { value: '6l', label: '6L', checked: false },
-      { value: '12l', label: '12L', checked: false },
-      { value: '18l', label: '18L', checked: false },
-      { value: '20l', label: '20L', checked: false },
-      { value: '40l', label: '40L', checked: true },
+      { value: 'subopt1', label: 'subopt1', checked: false },
+      { value: 'subopt2', label: 'subopt2', checked: false },
+      { value: 'subopt3', label: 'subopt3', checked: false },
+      { value: 'subopt4', label: 'supopt4', checked: false },
+      { value: 'subopt5', label: 'subopt5', checked: false },
+      { value: 'subopt6', label: 'subopt6', checked: true },
     ],
   },
 ]
@@ -291,8 +292,10 @@ export default function Filter1(props) {
 
               {/* Product grid */}
               <div className="lg:col-span-3">
+                <Input1 />
                 {/* Replace with your content */}
-                <div className="h-96 rounded-lg border-4 border-dashed border-gray-200 lg:h-full" />
+                <div className="h-96 rounded-lg mt-4 border-4 border-dashed border-gray-200 lg:h-full">
+                </div>
                 {/* /End replace */}
               </div>
             </div>
