@@ -19,33 +19,65 @@ const UrlState = ({children}) => {
     // define the state
     const initialState = {
         loading: false,
-        url: [],
         dom: null,
+        urls: '',
         field: '',
         domLinks: []
     }
 
     // Dispatch the reducer
-    const [state, dispatch] = useReducer(TodoReducer, initialState);
+    const [state, dispatch] = useReducer(UrlReducer, initialState);
+
+    // Destructure the states
+    const { 
+        loading,
+        dom,
+        field,
+        domLinks,
+        urls } = state
 
     // Get Url from Form
-    const getUrl = (payload) => {
-        dispatch({type: Get_Urls, payload: payload})
+    const getUrl = async (payload) => {
+        if(urls === undefined){
+            dispatch({type: Get_Urls, payload: payload})
+        }else{
+            dispatch({type: Get_Urls, payload: urls})
+        }
     }
 
     // Get UrlDOM
-    const getUrlDom = async () => {
+    const getUrlDom = async (argUrl) => {
         try {
-        const urlDom = await fetch(
-            // replace with url array from the state object
-            "https://jsonplaceholder.typicode.com/todos?_limit=5"
-        )
-        // const toJSON = await todos.json()
+            var url = new URL("http://localhost:5000/url?"),
+                params = {lat:35.696233, long:139.570431, foo: argUrl, bar: true}
+                Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+            const urlDom = fetch(url).then((e) => console.log(e));
 
-        dispatch({ type: GET_TODOS, payload: urlDom })
+        // const toJSONs = await urlDom.json();
+        const toJSON = await urlDom;
+
+        dispatch({ type: Get_Url_Dom, payload: toJSON })
+
+        
+        console.log(state)
         } catch (err) {
         console.error(err.message)
         }
     }
 
+    return <UrlContext.Provider
+            value={{
+                loading,
+                urls,
+                dom,
+                field,
+                domLinks,
+                getUrl,
+                getUrlDom
+            }}>
+        {children}
+    </UrlContext.Provider>
+
 }
+
+export default UrlState;
