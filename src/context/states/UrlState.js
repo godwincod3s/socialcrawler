@@ -7,8 +7,8 @@ import UrlContext from "../UrlContext"
 import {
     Get_Urls,
     Get_Url_Dom,
-    Get_Dom_Links,
-    Clear_url_field
+    Get_Filename,
+    Get_Dom_Links
 } from "../types/UrlTypes"
 
 // Reducers
@@ -20,9 +20,10 @@ const UrlState = ({children}) => {
     const initialState = {
         loading: false,
         dom: null,
-        urls: '',
+        url: '',
         field: '',
-        domLinks: []
+        domLinks: [],
+        file: ''
     }
 
     // Dispatch the reducer
@@ -34,36 +35,55 @@ const UrlState = ({children}) => {
         dom,
         field,
         domLinks,
-        urls } = state
+        urls,
+        file } = state
 
     // Get Url from Form
     const getUrl = async (payload) => {
-        if(urls === undefined){
-            dispatch({type: Get_Urls, payload: payload})
-        }else{
-            dispatch({type: Get_Urls, payload: urls})
-        }
+        dispatch({type: Get_Urls, payload: payload})
     }
 
     // Get UrlDOM
     const getUrlDom = async (argUrl) => {
         try {
             var url = new URL("http://localhost:5000/url?"),
-                params = {lat:35.696233, long:139.570431, foo: argUrl, bar: true}
-                Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-            const urlDom = fetch(url).then((e) => console.log(e));
+                params = {lat:35.696233, long:139.570431, url: argUrl, fileUrl: file}
+                Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
-        // const toJSONs = await urlDom.json();
-        const toJSON = await urlDom;
+        await fetch(url).then(e => e.json()).then(d => {
+            dispatch({ type: Get_Url_Dom, payload: d });
+            // return d;
+        });
 
-        dispatch({ type: Get_Url_Dom, payload: toJSON })
-
-        
-        console.log(state)
         } catch (err) {
-        console.error(err.message)
+            console.error(err.message)
         }
     }
+
+    const onFileChange = (e) => {
+        
+        dispatch({type:Get_Filename, payload: e.target.value})
+    }
+    console.log(state)
+
+    /*
+        fetch('www.example.com/document.html')
+        .then(response => response.text()) // Read the response as text
+        .then(html => alert(html)); // Alert the retrieved HTML content
+
+        fetch('www.example.com/submit-form', {
+        method: 'POST', // Specify the HTTP method
+        body: new FormData(document.querySelector('form')) // Collect form data })
+        .then(response => response.text()) // Read response as text
+        .then(data => alert(data)) // Alert the response
+
+        try {
+        fetch('www.example.com/submit-form', {
+        method: 'POST', // Specify the HTTP method
+        body: new FormData(document.querySelector('form')) // Collect form data })
+        .then(response => response.text()) // Read response as text
+        .then(data => alert(data)) // Alert the response } catch (error) { alert('An error occurred!'); }
+    */
 
     return <UrlContext.Provider
             value={{
@@ -72,8 +92,10 @@ const UrlState = ({children}) => {
                 dom,
                 field,
                 domLinks,
+                file,
                 getUrl,
-                getUrlDom
+                getUrlDom,
+                onFileChange
             }}>
         {children}
     </UrlContext.Provider>

@@ -1,22 +1,27 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import UrlContext from '../../context/UrlContext'
 
 export default function Input1() {
-  const { getUrl, getUrlDom, urls } = useContext(UrlContext);
+  const { getUrl, getUrlDom, urls, file, onFileChange } = useContext(UrlContext);
 
   const onUrlChange = (e) => {
     e.preventDefault();
     getUrl(e.target.value)
   } 
 
+  useEffect(() => {
+    console.log(document.getElementById('excelfile').value);
+  }, [file])
+
 
 
     return (
       <div>
+        <input className="custom-file-input z-50" onChange={onFileChange} type="file" id="excelfile" />
         <div className="relative mt-1 rounded-md shadow-sm">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <span className="text-white sm:text-sm">&#128279;</span>
+          <span className="text-white sm:text-sm">&#128279;</span>
           </div>
           <input
             type="text"

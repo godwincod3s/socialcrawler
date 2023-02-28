@@ -2,6 +2,7 @@ import {
     Get_Urls,
     Get_Url_Dom,
     Get_Dom_Links,
+    Get_Filename,
     Clear_url_field
 } from '../types/UrlTypes'
 
@@ -25,10 +26,10 @@ export default (state, {type, payload} ) => {
                 loading: true, 
                 links: payload       
             }
-        case Clear_url_field:
+        case Get_Filename:
             return {
                 ...state,
-                field: ''
+                file: payload
             }
     }
 }

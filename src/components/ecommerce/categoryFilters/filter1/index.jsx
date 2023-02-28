@@ -293,8 +293,11 @@ export default function Filter1(props) {
               {/* Product grid */}
               <div className="lg:col-span-3">
                 <Input1 />
-                {/* Replace with your content */}
+                {/* Replace with contents */}
                 <div className="h-96 rounded-lg mt-4 border-4 border-dashed border-gray-200 lg:h-full">
+                      {/* {fetch('http://localhost:5000/crawl/links').then((res) => {
+                        return<p class="" id="crawledlink">{res.data.links}</p>
+                      })} */}
                 </div>
                 {/* /End replace */}
               </div>
